@@ -72,3 +72,4 @@ for params in pbar(grid):
 # output to csv
 fullDF.to_csv('C:\\Users\\yezda\\OneDrive\\Python Virtual Environments\\BlackScholeML\\BSMNNvenv\\dataFullV2.csv', index = False)
 print('csv has been saved to venv file!')
+#Warning to anyone who would like to replicate this, the data set will be quite large, might be worth it to migrate it to cloud storage to save local storage space.
