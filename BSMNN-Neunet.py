@@ -32,9 +32,7 @@ df_training = pd.read_csv(path)
 inputs = df_training[['K','S','q','r','sigma','t']]
 outputs = df_training[['price']]
 
-# I had the thought that the reason that the accuracy sucks balls when training is because my training set might have folating point arithmetic
-#problems and the NN output doesnt so, accuracy is fucking garbage while cost goes dowm, the idea to fix this is to use StandardScaler() and
-#hope thatnormalised data will deal with the wackiness of floating point arithmtic and things will worl better.
+# Tried to see if scaling data would improve accuracy, no noticeable difference.
 '''scaler = StandardScaler()
 
 # Fit the scaler to your DataFrame and transform it
@@ -51,12 +49,13 @@ def baseline_model():
     y = Dense(10, activation='relu')(x)
     o = Dense(1)(y)
     model = Model(i, o)
-    # Use SGD optimizer with specified learning rate and momentum
+    # Tried using SGD optimizer with specified learning rate and momentum, minimal improvement in accuracy.
     '''optimizer = Adagrad(learning_rate=0.001,initial_accumulator_value=0.1,epsilon=1e-06,weight_decay=None,clipnorm=None,clipvalue=None,global_clipnorm=None,use_ema=False,ema_momentum=0.99,ema_overwrite_frequency=None,jit_compile=True,name="Adagrad")'''
 
     model.compile(loss="mse", optimizer='adam', metrics=['accuracy'])
     return model
 model_full = baseline_model()
+# Tried using a learning rate scheduler, again: some but not much better.
 '''
 def learning_rate_schedule(epoch):
     initial_lr = 0.001  # Initial learning rate
